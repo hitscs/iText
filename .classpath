@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/itextpdf-5.4.5.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/itext-asian.jar"/>
+	<classpathentry kind="lib" path="lib/xmlworker-5.4.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

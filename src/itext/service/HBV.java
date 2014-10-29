@@ -1,4 +1,4 @@
-package itext.main;
+package itext.service;
 
 import itext.utils.FileTools;
 import itext.utils.WatermarkUtil;
@@ -31,7 +31,17 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @author lin
  * @date 2013-12-24 下午3:05:41
  */
-public class HBV_SNP_PDF {
+public class HBV {
+
+	public static void main(String[] args) {
+		try {
+			HBV.createPDF("/home/lin/21/82/20140905511093/SVG/", "HBV2");
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @param snpPath
 	 *            :目录到 SVG/
@@ -53,6 +63,7 @@ public class HBV_SNP_PDF {
 				resultMap.put(num, site);
 			}
 		}
+		resultMap.put("blank", "blank.png");
 
 		// 其他检测结果图片
 		List<String> other = FileTools
@@ -126,18 +137,15 @@ public class HBV_SNP_PDF {
 		if (resultMap.get("204") != null) {
 			img = Image.getInstance(snpPath + resultMap.get("204"));
 			img.scaleAbsolute(100f, 100f); // 设置图片大小
-			img.setAlignment(Image.ALIGN_LEFT);// 设置图片居中显示
 			doc.add(img);
 		}
-
 		title = new Paragraph("3.阿德福韦 ADV 突变检测", contextFont);
 		doc.add(title);
-		String p3[] = { "181", "236" };
-		float widths3[] = { 100f, 100f };// 设置表格的列宽和列数 默认是4列
-		table = new PdfPTable(widths3);// 建立一个pdf表格
+		String p3[] = { "181", "236", "blank", "blank" };
+		table = new PdfPTable(4);// 建立一个pdf表格
 		table.setSpacingBefore(20f);// 设置表格上面空白宽度
 		table.setTotalWidth(200);// 设置表格的宽度
-		// table.setWidthPercentage(100);// 设置表格宽度为%100
+		table.setWidthPercentage(100);// 设置表格宽度为%100
 		table.getDefaultCell().setBorder(0);// 设置表格默认为无边框
 
 		for (String f : p3) {
@@ -154,12 +162,11 @@ public class HBV_SNP_PDF {
 
 		title = new Paragraph("4.拉米夫定 LAM 突变检测", contextFont);
 		doc.add(title);
-		String p4[] = { "173", "180", "204" };
-		float widths4[] = { 100f, 100f, 100f };// 设置表格的列宽和列数 默认是4列
-		table = new PdfPTable(widths4);// 建立一个pdf表格
+		String p4[] = { "173", "180", "204", "blank" };
+		table = new PdfPTable(4);// 建立一个pdf表格
 		table.setSpacingBefore(20f);// 设置表格上面空白宽度
-		table.setTotalWidth(300);// 设置表格的宽度
-		// table.setWidthPercentage(100);// 设置表格宽度为%100
+		table.setTotalWidth(400);// 设置表格的宽度
+		table.setWidthPercentage(100);// 设置表格宽度为%100
 		table.getDefaultCell().setBorder(0);// 设置表格默认为无边框
 
 		for (String f : p4) {
@@ -176,15 +183,15 @@ public class HBV_SNP_PDF {
 		
 		title = new Paragraph("5.恩曲他滨 FTC 突变检测", contextFont);
 		doc.add(title);
-		String p5[] = { "173", "180", "204" };
-		float widths5[] = { 100f, 100f, 100f };// 设置表格的列宽和列数 默认是4列
-		table = new PdfPTable(widths5);// 建立一个pdf表格
+		String p5[] = { "173", "180", "204", "blank" };
+		table = new PdfPTable(4);// 建立一个pdf表格
 		table.setSpacingBefore(20f);// 设置表格上面空白宽度
-		table.setTotalWidth(300);// 设置表格的宽度
-		// table.setWidthPercentage(100);// 设置表格宽度为%100
+		table.setTotalWidth(400f);// 设置表格的宽度
+		table.setWidthPercentage(100);// 设置表格宽度为%100
 		table.getDefaultCell().setBorder(0);// 设置表格默认为无边框
 		for (String f : p5) {
 			if (resultMap.get(f) != null) {
+				System.out.println(snpPath + resultMap.get(f));
 				img = Image.getInstance(snpPath + resultMap.get(f));
 				img.scaleAbsolute(100f, 100f); // 设置图片大小
 				img.setAlignment(Image.ALIGN_LEFT);// 设置图片居左显示
@@ -197,18 +204,17 @@ public class HBV_SNP_PDF {
 
 		title = new Paragraph("6.恩替卡韦 ETV 突变检测", contextFont);
 		doc.add(title);
-		String p6[] = { "169", "180", "184", "202", "204", "250" };
-		float widths6[] = { 100f, 100f, 100f, 100f, 100f, 100f };// 设置表格的列宽和列数
-																	// 默认是4列
-		table = new PdfPTable(widths6);// 建立一个pdf表格
+		String p6[] = { "169", "180", "184", "202", "204", "250", "blank",
+				"blank" };
+		table = new PdfPTable(4);// 建立一个pdf表格
 		table.setSpacingBefore(20f);// 设置表格上面空白宽度
-		table.setTotalWidth(500);// 设置表格的宽度
-		// table.setWidthPercentage(100);// 设置表格宽度为%100
+		table.setTotalWidth(600);// 设置表格的宽度
+		table.setWidthPercentage(100);// 设置表格宽度为%100
 		table.getDefaultCell().setBorder(0);// 设置表格默认为无边框
 		for (String f : p6) {
 			if (resultMap.get(f) != null) {
 				img = Image.getInstance(snpPath + resultMap.get(f));
-				img.scaleAbsolute(70f, 70f); // 设置图片大小
+				img.scaleAbsolute(100f, 100f); // 设置图片大小
 				img.setAlignment(Image.ALIGN_LEFT);// 设置图片居左显示
 				cell = new PdfPCell(img);
 				cell.setBorder(Rectangle.NO_BORDER);// 设置单元格无边框
@@ -224,7 +230,7 @@ public class HBV_SNP_PDF {
 		table = new PdfPTable(widths7);// 建立一个pdf表格
 		table.setSpacingBefore(20f);// 设置表格上面空白宽度
 		table.setTotalWidth(400);// 设置表格的宽度
-		// table.setWidthPercentage(100);// 设置表格宽度为%100
+		table.setWidthPercentage(100);// 设置表格宽度为%100
 		table.getDefaultCell().setBorder(0);// 设置表格默认为无边框
 		for (String f : other) {
 			img = Image.getInstance(snpPath + f);
